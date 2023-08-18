@@ -1,0 +1,81 @@
+[gd_scene load_steps=6 format=3 uid="uid://bbfffuhjevk1i"]
+
+[ext_resource type="Script" path="res://Hud.cs" id="1_f268e"]
+[ext_resource type="FontFile" uid="uid://bxt627kxyxrg3" path="res://assets/Kenney Future.ttf" id="2_8li2i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ifex"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_color = Color(0.8, 0.8, 0.8, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ub26t"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n31hs"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_color = Color(0.8, 0.8, 0.8, 0)
+
+[node name="Hud" type="CanvasLayer"]
+script = ExtResource("1_f268e")
+
+[node name="Score" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -13.5
+offset_top = 8.0
+offset_right = 13.5
+offset_bottom = 47.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_8li2i")
+theme_override_font_sizes/font_size = 28
+text = "0"
+horizontal_alignment = 1
+
+[node name="Message" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -67.5
+offset_top = 9.0
+offset_right = 67.5
+offset_bottom = 48.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_8li2i")
+theme_override_font_sizes/font_size = 28
+horizontal_alignment = 1
+
+[node name="StartButton" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -65.0
+offset_top = -55.0
+offset_right = 65.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_8li2i")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_7ifex")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ub26t")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_n31hs")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ub26t")
+text = " Start"
+
+[node name="MessageTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="pressed" from="StartButton" to="." method="OnStartButtonPressed"]

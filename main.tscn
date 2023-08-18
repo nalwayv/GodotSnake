@@ -1,0 +1,66 @@
+[gd_scene load_steps=12 format=3 uid="uid://8sstor22xo5t"]
+
+[ext_resource type="Script" path="res://Main.cs" id="1_npnao"]
+[ext_resource type="PackedScene" uid="uid://bcespu8kxpa4c" path="res://pill.tscn" id="2_whndf"]
+[ext_resource type="PackedScene" uid="uid://641eyyc1ajuq" path="res://head.tscn" id="3_m12ds"]
+[ext_resource type="PackedScene" uid="uid://d20a6vdphh4ar" path="res://body.tscn" id="3_yo6hy"]
+[ext_resource type="PackedScene" uid="uid://bqrb5wyvt6day" path="res://blank.tscn" id="4_pvbnd"]
+[ext_resource type="Script" path="res://Camera.cs" id="6_rokui"]
+[ext_resource type="PackedScene" uid="uid://bbfffuhjevk1i" path="res://hud.tscn" id="6_s0m0m"]
+[ext_resource type="PackedScene" uid="uid://xb8ys1ss0s0o" path="res://map.tscn" id="7_4b4r2"]
+
+[sub_resource type="Gradient" id="Gradient_s2x4p"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_adfw3"]
+gradient = SubResource("Gradient_s2x4p")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_xei2g"]
+diffuse_texture = SubResource("GradientTexture1D_adfw3")
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_npnao")
+PillScene = ExtResource("2_whndf")
+BlankScene = ExtResource("4_pvbnd")
+BodyScene = ExtResource("3_yo6hy")
+
+[node name="Camera" type="Camera2D" parent="."]
+anchor_mode = 0
+script = ExtResource("6_rokui")
+
+[node name="Duration" type="Timer" parent="Camera"]
+
+[node name="Frequence" type="Timer" parent="Camera"]
+
+[node name="Hud" parent="." instance=ExtResource("6_s0m0m")]
+
+[node name="Map" parent="." instance=ExtResource("7_4b4r2")]
+
+[node name="Head" parent="." instance=ExtResource("3_m12ds")]
+visible = false
+
+[node name="Bg" type="Sprite2D" parent="."]
+position = Vector2(240, 320)
+scale = Vector2(2.03125, 680)
+texture = SubResource("CanvasTexture_xei2g")
+
+[node name="BodyContainer" type="Node" parent="."]
+
+[node name="PillContainer" type="Node" parent="."]
+
+[node name="BlankContainer" type="Node" parent="."]
+
+[node name="PillSpawnTimer" type="Timer" parent="."]
+
+[node name="BlankSpawnTimer" type="Timer" parent="."]
+wait_time = 8.0
+
+[connection signal="timeout" from="Camera/Duration" to="Camera" method="OnDurationTimeout"]
+[connection signal="timeout" from="Camera/Frequence" to="Camera" method="OnFrequencyTimeout"]
+[connection signal="StartGame" from="Hud" to="." method="OnHudStartGame"]
+[connection signal="GameOver" from="Head" to="." method="OnHeadGameOver"]
+[connection signal="HitPill" from="Head" to="." method="OnHeadHitPill"]
+[connection signal="Moved" from="Head" to="." method="OnHeadMoved"]
+[connection signal="timeout" from="PillSpawnTimer" to="." method="OnPillSpawnTimerTimeout"]
+[connection signal="timeout" from="BlankSpawnTimer" to="." method="OnBlankSpawnTimerTimeout"]

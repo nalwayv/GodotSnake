@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcespu8kxpa4c"]
+
+[ext_resource type="Script" path="res://Pill.cs" id="1_41f4r"]
+[ext_resource type="Texture2D" uid="uid://poel6h7cx5ca" path="res://assets/pill.png" id="1_twk7n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_66vcu"]
+size = Vector2(16, 16)
+
+[node name="Pill" type="Area2D" groups=["Pill"]]
+z_index = 2
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_41f4r")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_twk7n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 1
+shape = SubResource("RectangleShape2D_66vcu")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="OnTimerTimeout"]

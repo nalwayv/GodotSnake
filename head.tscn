@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://641eyyc1ajuq"]
+
+[ext_resource type="Script" path="res://Head.cs" id="1_5tnbx"]
+[ext_resource type="Texture2D" uid="uid://bevda5kwvemv" path="res://assets/gridHead.png" id="2_rhre5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_peuek"]
+size = Vector2(16, 16)
+
+[node name="Head" type="Area2D"]
+z_index = 2
+collision_mask = 6
+script = ExtResource("1_5tnbx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 2
+texture = ExtResource("2_rhre5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_peuek")
+
+[node name="HitStop" type="Timer" parent="."]
+
+[connection signal="area_entered" from="." to="." method="OnAreaEntered"]
+[connection signal="timeout" from="HitStop" to="." method="OnHitStopTimeout"]

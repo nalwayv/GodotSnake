@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://xb8ys1ss0s0o"]
+
+[ext_resource type="Texture2D" uid="uid://dkuy1hy4f0osn" path="res://assets/gridCell.png" id="1_y2km2"]
+[ext_resource type="Script" path="res://Map.cs" id="2_poh4a"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vcddp"]
+texture = ExtResource("1_y2km2")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_p6evd"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_vcddp")
+
+[node name="Map" type="TileMap"]
+z_index = 1
+tile_set = SubResource("TileSet_p6evd")
+format = 2
+script = ExtResource("2_poh4a")
